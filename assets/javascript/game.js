@@ -14,15 +14,12 @@ var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 var guessesLeftText = document.getElementById("guessesleft-text");
 var currentGuessesText = document.getElementById("currentguesses-text");
-
-
-function emptyArray () {
-    userGuesses.clear();
-}
+var bannerText = document.getElementById("banner-text")
 
 function letterGenerator () {
 
 directionsText.textContent = "";    
+bannerText.textContent = "Guess what letter I am thinking of..."
 //Computer generates random letter from the alphabet
 var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
 console.log(computerGuess)
@@ -70,7 +67,7 @@ document.onkeyup = function (event) {
     guessesLeftText.textContent = "Guesses Left: " + guesses;
 
     if (wins === 10) {
-    
+    bannerText.textContent = "You Win!";
     directionsText.textContent = "";
     winsText.textContent = "";
     lossesText.textContent = "";
@@ -82,12 +79,16 @@ document.onkeyup = function (event) {
     letterGenerator();
 }
 else if (losses === 10) {
-    directionsText.textContent = "Nice try human. You Lose.";
+    bannerText.textContent = "Sorry. Try Again.";
+    directionsText.textContent = "";
     winsText.textContent = "";
     lossesText.textContent = "";
     guessesLeftText.textContent = ""; 
 
     currentGuessesText.textContent = "Press any key to play again..."
+    wins=0;
+    losses=0;
+    guesses=9;
     letterGenerator();
 }
 
