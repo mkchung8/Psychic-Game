@@ -12,9 +12,7 @@ To use this game application, click on the link to the live demo listed above or
 
 User will initiate the game once they hit any letter on their keyboard. 
 
-<img src = "./assets/images/pyschicgame1.jpeg
-">
-
+<img src = "./assets/images/pyschicgame1.jpeg">
 
 The user will have 9 attempts per round to correctly guess the letter. The application keeps track of the user and computer score, as well as letters that have already been guessed by the user. The game will end once a score of ten has been reached by either player. To restart the game, simply press any key on the keyboard. 
 
