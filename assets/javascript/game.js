@@ -1,10 +1,10 @@
 //List array of computer choices 
-var computerChoices = ["b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+var computerChoices = ["b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
 
 
 //Creating variables to hold the starting number of wins, losses, and guesses left as well as user guesses for that round
 var wins = 0;
-var losses = 0; 
+var losses = 0;
 var guesses = 9;
 var userGuesses = [];
 
@@ -14,90 +14,82 @@ var winsText = document.getElementById("wins-text");
 var lossesText = document.getElementById("losses-text");
 var guessesLeftText = document.getElementById("guessesleft-text");
 var currentGuessesText = document.getElementById("currentguesses-text");
-var bannerText = document.getElementById("banner-text")
+var bannerText = document.getElementById("banner-text");
 
-function letterGenerator () {
+function letterGenerator() {
 
-directionsText.textContent = "";    
-bannerText.textContent = "Guess what letter I am thinking of..."
-//Computer generates random letter from the alphabet
-var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
-console.log(computerGuess)
+    directionsText.textContent = "";
+    bannerText.textContent = "Guess what letter I am thinking of...";
 
-var guesses = 9;
+    //Computer generates random letter from the alphabet
+    var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+    console.log(computerGuess);
 
+    var guesses = 9;
 
-document.onkeyup = function (event) {
-    var userGuess = event.key;
+    document.onkeyup = function (event) {
+        var userGuess = event.key;
 
-    userGuesses.push(userGuess);
-    console.log(userGuesses);
-    console.log(userGuess);
-    currentGuessesText.textContent = "Your current guesses: " + " " + userGuesses + " ";
- 
-    if (userGuess === computerGuess) {
-        wins++;
-        letterGenerator();
-        userGuesses.length = 0;
-        currentGuessesText.textContent = "Your current guess: WAS CORRECT!";
-    }
-    else {
+        userGuesses.push(userGuess);
+        console.log(userGuesses);
+        console.log(userGuess);
+        currentGuessesText.textContent = "Your current guesses: " + " " + userGuesses + " ";
+
+        if (userGuess === computerGuess) {
+            wins++;
+            letterGenerator();
+            userGuesses.length = 0;
+            currentGuessesText.textContent = "Your current guess: WAS CORRECT!";
+        }
+        else {
             if (userGuesses.length < 9) {
                 guesses--;
 
             }
-            else if(userGuesses.length === 9) {
+            else if (userGuesses.length === 9) {
                 losses++;
                 userGuesses.length = 0;
                 currentGuessesText.textContent = "Your current guesses: ";
                 letterGenerator();
-                
+
             }
-        }              
+        };
 
+        winsText.textContent = "Wins: " + wins;
+        lossesText.textContent = "Losses: " + losses;
+        guessesLeftText.textContent = "Guesses Left: " + guesses;
 
-        
-                    
+        if (wins === 10) {
+            bannerText.textContent = "You Win!";
+            directionsText.textContent = "";
+            winsText.textContent = "";
+            lossesText.textContent = "";
+            guessesLeftText.textContent = "";
+            currentGuessesText.textContent = "Press any key to play again..."
+            wins = 0;
+            losses = 0;
+            guesses = 9;
+            letterGenerator();
+        }
+        else if (losses === 10) {
+            bannerText.textContent = "Sorry. Try Again.";
+            directionsText.textContent = "";
+            winsText.textContent = "";
+            lossesText.textContent = "";
+            guessesLeftText.textContent = "";
 
+            currentGuessesText.textContent = "Press any key to play again..."
+            wins = 0;
+            losses = 0;
+            guesses = 9;
+            letterGenerator();
+        }; 
 
+    }; 
 
-     
-    winsText.textContent = "Wins: " + wins;
-    lossesText.textContent = "Losses: " + losses; 
-    guessesLeftText.textContent = "Guesses Left: " + guesses;
+}; 
 
-    if (wins === 10) {
-    bannerText.textContent = "You Win!";
-    directionsText.textContent = "";
-    winsText.textContent = "";
-    lossesText.textContent = "";
-    guessesLeftText.textContent = ""; 
-    currentGuessesText.textContent = "Press any key to play again..."
-    wins = 0;
-    losses = 0; 
-    guesses = 9;
-    letterGenerator();
-}
-else if (losses === 10) {
-    bannerText.textContent = "Sorry. Try Again.";
-    directionsText.textContent = "";
-    winsText.textContent = "";
-    lossesText.textContent = "";
-    guessesLeftText.textContent = ""; 
-
-    currentGuessesText.textContent = "Press any key to play again..."
-    wins=0;
-    losses=0;
-    guesses=9;
-    letterGenerator();
-}
-
-}
-
-}
-
-letterGenerator ();
-
+letterGenerator();
 
 
 //User generates guess by pressing a key 
